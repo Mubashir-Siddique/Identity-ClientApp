@@ -23,22 +23,24 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
       lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
-      email: ['', [Validators.pattern('^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$')]],
+      email: ['', [Validators.required,Validators.pattern('^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$')]],
       password: ['', [Validators.required,Validators.minLength(6),Validators.maxLength(15)]],
     })
   }
 
-  register(){
+  register() {
     this.submitted = true;
     this.errorMessages = [];
 
-    this.accountService.register(this.registerForm.value).subscribe({
-      next: (response)=> {
-        console.log(response);
-      },
-      error: error=>{
-      console.log(error);  
-      }
-    })
+    if (this.registerForm.valid) {
+      this.accountService.register(this.registerForm.value).subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+        error: error => {
+          console.log(error);
+        }
+      })
+    }
   }
 }
