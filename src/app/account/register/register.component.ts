@@ -30,6 +30,15 @@ export class RegisterComponent implements OnInit {
 
   register(){
     this.submitted = true;
-    console.log(this.registerForm.value);
+    this.errorMessages = [];
+
+    this.accountService.register(this.registerForm.value).subscribe({
+      next: (response)=> {
+        console.log(response);
+      },
+      error: error=>{
+      console.log(error);  
+      }
+    })
   }
 }
