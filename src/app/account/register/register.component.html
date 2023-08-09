@@ -54,6 +54,13 @@
                         Password must be atleast 6 and maximum 15 characters 
                     </span>
                 </div>
+
+                <div class="form-floating" *ngIf="1 > 0">
+                    <app-validation-messages [errorMessages]="errorMessages">
+
+                    </app-validation-messages>
+                </div>
+
                 <div class="d-grid mt-4 px-1">
                     <button class="btn btn-lg btn-dark" type="submit">Create Account</button>
                 </div>

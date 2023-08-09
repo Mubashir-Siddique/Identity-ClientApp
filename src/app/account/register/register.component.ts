@@ -32,15 +32,18 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     this.errorMessages = [];
 
-    if (this.registerForm.valid) {
+    // if (this.registerForm.valid) {
       this.accountService.register(this.registerForm.value).subscribe({
         next: (response) => {
           console.log(response);
         },
         error: error => {
+          if (error.error.errors){
+            this.errorMessages = error.error.errors;
+          }
           console.log(error);
         }
       })
-    }
+    // }
   }
 }
