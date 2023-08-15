@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     this.errorMessages = [];
 
-    // if (this.registerForm.valid) {
+    if (this.registerForm.valid) {
       this.accountService.register(this.registerForm.value).subscribe({
         next: (response) => {
           console.log(response);
@@ -41,9 +41,11 @@ export class RegisterComponent implements OnInit {
           if (error.error.errors){
             this.errorMessages = error.error.errors;
           }
-          console.log(error);
+          else{
+            this.errorMessages.push(error.error)
+          }
         }
       })
-    // }
+    }
   }
 }
